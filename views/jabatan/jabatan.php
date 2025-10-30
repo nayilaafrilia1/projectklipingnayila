@@ -1,43 +1,63 @@
 <?php
-include 'koneksi.php'; // koneksi ke database
+if (!isset($koneksi)) {
+    include __DIR__ . '/../../koneksi.php';
+}
 ?>
 
-<div class="card">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Data Jabatan</h3> <a href="tambah_jabatan.php" class="btn btn-primary btn-sm"> + Tambah Jabatan </a>
-        </div>
+<div class="card shadow-sm border-0">
+  <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+    <h3 class="card-title m-0">
+      <i class="fas fa-briefcase me-2"></i>Data Jabatan
+    </h3>
+    <a href="index.php?halaman=tambahjabatan" class="btn btn-light btn-sm">
+      <i class="fas fa-plus"></i> Tambah Jabatan
+    </a>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table id="example1" class="table table-striped table-bordered m-0 text-sm">
+        <thead class="text-center bg-light">
+          <tr>
+            <th>No.</th>
+            <!-- Kolom ID Jabatan dihapus dari tampilan -->
+            <th>Nama Jabatan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $no = 1;
+          $query = mysqli_query($koneksi, "SELECT * FROM jabatan ORDER BY idjabatan ASC");
+          if ($query && mysqli_num_rows($query) > 0) {
+            while ($data = mysqli_fetch_assoc($query)) {
+              $id = htmlspecialchars($data['idjabatan']);
+              $nama = htmlspecialchars($data['namajabatan']);
+          ?>
+              <tr>
+                <td class="text-center"><?= $no++; ?></td>
+                <td><?= $nama; ?></td>
+                <td class="text-center">
+                  <a href="index.php?halaman=editjabatan&idjabatan=<?= urlencode($id); ?>" 
+                     class="btn btn-warning btn-sm" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="db/dbjabatan.php?proses=hapus&idjabatan=<?= urlencode($id); ?>" 
+                     class="btn btn-danger btn-sm"
+                     onclick="return confirm('Yakin ingin menghapus jabatan: <?= addslashes($nama); ?>?');" 
+                     title="Hapus">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+          <?php
+            }
+          } else {
+            echo '<tr><td colspan="3" class="text-center">Data jabatan masih kosong.</td></tr>';
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
-    
-    <div class="card-body">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th style="width: 50px;">No</th>
-                    <th>Nama Jabatan</th> </tr>
-            </thead>
-            <tbody>
-                <?php
-                $no = 1;
-                // Changed: SELECT * FROM kategori ORDER BY idkategori ASC
-                // New: SELECT * FROM jabatan ORDER BY idjabatan ASC
-                $query = mysqli_query($koneksi, "SELECT * FROM jabatan ORDER BY idjabatan ASC"); 
-                
-                if (mysqli_num_rows($query) > 0) {
-                    while ($data = mysqli_fetch_array($query)) {
-                        echo "<tr>";
-                        echo "<td>" . $no++ . "</td>";
-                        // Changed: $data['namakategori']
-                        // New: $data['namajabatan']
-                        echo "<td>" . htmlspecialchars($data['namajabatan']) . "</td>"; 
-                        echo "</tr>";
-                    }
-                } else {
-                    // Pesan dan colspan disesuaikan untuk Jabatan (colspan='2')
-                    echo "<tr><td colspan='2' class='text-center'>Belum ada data jabatan.</td></tr>"; 
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+  </div>
 </div>

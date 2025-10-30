@@ -2,7 +2,7 @@
 $server = "localhost";
 $user   = "root";
 $pass   = "";
-$db     = "projectklipingnayila";
+$db     = "projectklipingnayila"; // ganti nama sesuai database kamu
 
 // Membuat koneksi
 $koneksi = mysqli_connect($server, $user, $pass, $db);
@@ -11,7 +11,4 @@ $koneksi = mysqli_connect($server, $user, $pass, $db);
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
-// else {
-//     echo "Koneksi berhasil!";
-// }
-?>
+// else
