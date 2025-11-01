@@ -200,17 +200,7 @@
             </li>
           </ul>
         </li>
-        <!-- ========================= -->
-        <!--          LOGOUT           -->
-        <!-- ========================= -->
-        <li class="nav-header">Keluar</li>
-        <li class="nav-item">
-          <a href="#" class="nav-link text-danger"
-             onclick="if(confirm('Apakah Anda yakin ingin logout?')) { window.location='logout.php'; }">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
-            <p>Logout</p>
-          </a>
-        </li>
+      
 
       </ul>
     </nav>

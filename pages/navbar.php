@@ -1,3 +1,9 @@
+<?php
+// Pastikan session aktif
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+?>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-light bg-white border-bottom shadow-sm">
 
@@ -89,7 +95,7 @@
           <i class="fas fa-user mr-2"></i> Profil
         </a>
         <div class="dropdown-divider"></div>
-        <a href="logout.php" class="dropdown-item text-danger">
+        <a href="#" class="dropdown-item text-danger" onclick="logoutConfirm()">
           <i class="fas fa-sign-out-alt mr-2"></i> Logout
         </a>
       </div>
@@ -111,6 +117,15 @@
   </ul>
 </nav>
 <!-- /.navbar -->
+
+<!-- Script Logout -->
+<script>
+function logoutConfirm() {
+  if (confirm("Apakah Anda yakin ingin logout?")) {
+    window.location.href = "logout.php";
+  }
+}
+</script>
 
 <!-- Custom CSS -->
 <style>

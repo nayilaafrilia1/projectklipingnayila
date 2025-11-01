@@ -27,9 +27,8 @@ if (!$data) {
   <div class="card shadow-sm border-0">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="fas fa-user-shield"></i> Tampil Admin</h5>
-      <a href="?halaman=admin" class="btn btn-light btn-sm">
-        <i class="fas fa-arrow-left"></i> Kembali
-      </a>
+    
+     
     </div>
 
     <div class="card-body">
@@ -69,7 +68,14 @@ if (!$data) {
         </div>
       </div>
 
+      <!-- Tombol Aksi -->
       <div class="mt-4 text-center">
+        <!-- 🔸 Tombol Edit Profil -->
+        <a href="?halaman=editadmin&id=<?= base64_encode($data['idadmin']); ?>" class="btn btn-warning me-2">
+          <i class="fas fa-edit"></i> Edit Profil
+        </a>
+
+        <!-- 🔹 Tombol Kembali -->
         <a href="?halaman=admin" class="btn btn-danger">
           <i class="fas fa-arrow-left"></i> Kembali ke Daftar Admin
         </a>
